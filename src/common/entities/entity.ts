@@ -8,7 +8,7 @@ export class CommonEntity {
 
     @IsNumber()
     @Field(() => Int)
-    protected id: number;
+    protected index: number;
 
     @IsDate()
     @Field(() => Date)
@@ -22,8 +22,8 @@ export class CommonEntity {
     @Field(() => Date)
     protected deletedAt: Date;
 
-    public getId(): number {
-        return this.id;
+    public getIndex(): number {
+        return this.index;
     }
 
     public getCreatedAt(): Date {

@@ -1,4 +1,4 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { InputType, Field } from '@nestjs/graphql';
 import { plainToClass } from 'class-transformer';
 import { User } from 'src/user/entities/user.entity';
 import { Todo } from '../entities/todo.entity';
@@ -15,14 +15,18 @@ export class CreateTodoInput {
   isDone: boolean;
 
   @Field(() => Date)
-  createdAt: Date;
+  createdAt: number;
 
   @Field(() => Date)
-  updatedAt: Date;
+  updatedAt: number;
 
   public static newFromTodo(todo: Todo): CreateTodoInput {
     const dto: CreateTodoInput = plainToClass(CreateTodoInput, todo);
-    const owner: User = todo.getOwner();
+
+    dto.owner = todo.getOwner();
+
+    dto.createdAt = todo.getCreatedAt().getTime();
+    dto.updatedAt = todo.getUpdatedAt().getTime();
 
     return dto;
   }

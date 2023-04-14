@@ -1,15 +1,13 @@
-import { ObjectType, Field } from '@nestjs/graphql';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { CommonEntity } from 'src/common/entities/entity';
 import { User } from 'src/user/entities/user.entity';
-import { Entity } from 'typeorm';
 import { CreateTodoInput } from '../dto/create-todo.input';
 import { UpdateTodoInput } from '../dto/update-todo.input';
 
 @ObjectType()
-@Entity()
 export class Todo extends CommonEntity {
 
-  @Field(() => User)
+  @Field(() => Int)
   private readonly owner: User;
 
   @Field(() => String)
