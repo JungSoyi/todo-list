@@ -14,7 +14,8 @@ export class UserResolver {
 
   @Mutation(() => GraphqlCreateUserOutputDto)
   async createUser(@Args('createUserInput') createUserInput: CreateUserInputImpl) {
-    return new GraphqlCreateUserOutputDto(await this.createUserUsecase.execute(createUserInput));
+    const userResponse = new GraphqlCreateUserOutputDto(await this.createUserUsecase.execute(createUserInput));
+    return userResponse;
   }
 
   @Query(() => Int)

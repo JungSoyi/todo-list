@@ -2,7 +2,7 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
+type GraphqlUser {
   index: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -26,7 +26,7 @@ enum UserRole {
 
 type GraphqlCreateUserOutputDto {
   success: Boolean!
-  createdUser: User!
+  createdUser: GraphqlUser!
 }
 
 type Query {
