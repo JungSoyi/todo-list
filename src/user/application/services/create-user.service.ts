@@ -20,23 +20,19 @@ export class CreateUserService implements CreateUserUsecase {
         /**
          * @todo 이메일 검증하기
          */
-        // const validEmail = await this.validEmail(payload.email);
+        await this.validEmail(payload.email);
+
 
         /**
          * @todo 유저 정보 검증하기
          */
-        // const validInputData = await this.validUserId(payload.userId);
+        await this.validUserId(payload.userId);
+
 
         /**
          * 유저 엔티티 만들기
          */
-        const user = await new User({
-            name: payload.name,
-            email: payload.email,
-            password: payload.password,
-            role: payload.role,
-            userId: payload.userId,
-        });
+        const user = await new User(payload);
 
         /**
          * 데이터로 저장하기
@@ -55,7 +51,7 @@ export class CreateUserService implements CreateUserUsecase {
     async validEmail(email: string) {
         const userId = await this.dataService.get(email);
         if (userId) {
-            throw new Error('user exist');
+            throw new Error('email exist');
         }
         return true;
     }
@@ -64,7 +60,7 @@ export class CreateUserService implements CreateUserUsecase {
     async validUserId(userId: string) {
         const newUserId = await this.dataService.get(userId);
         if (newUserId) {
-            throw new Error('user exist');
+            throw new Error('userId exist');
         }
         return true;
     }

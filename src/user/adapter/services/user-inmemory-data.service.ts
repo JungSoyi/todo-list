@@ -1,4 +1,3 @@
-import { NotFoundException } from "@nestjs/common";
 import { DataService } from "src/common/database/data-service";
 import { User } from "../../domain/entities/user.entity";
 
@@ -12,11 +11,21 @@ export class UserInMemoryDataService implements DataService {
         return user;
     }
 
-    get(email: string) {
-        const user = this.users[email];
-        if (!user) {
-            throw new NotFoundException();
+    async get(input: string) {
+        if (input == 'email') {
+            const user = await this.users.find(user => user.email == input);
+            if (!user) {
+                return false;
+            }
+            return user;
         }
-        return user;
+        if (input == 'userId') {
+            const user = await this.users.find(user => user.userId == input);
+            if (!user) {
+                return false;
+            }
+            return user;
+        }
+
     }
 }
