@@ -1,6 +1,6 @@
 import { UserRole } from "src/common/enums/user.enum";
 
-export type CreateUserEntityPayload = {
+export interface CreateUserInput {
     userId: string;
     name: string;
     email: string;

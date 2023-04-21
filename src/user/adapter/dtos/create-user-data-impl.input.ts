@@ -1,10 +1,9 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { plainToClass } from 'class-transformer';
 import { UserRole } from 'src/common/enums/user.enum';
-import { User } from '../entities/user.entity';
+import { CreateUserDataInput } from 'src/user/application/dtos/create-user-data.input';
 
 @InputType()
-export class CreateUserInput {
+export class CreateUserDataInputImpl implements CreateUserDataInput {
 
   @Field(() => String)
   userId: string;
@@ -26,13 +25,4 @@ export class CreateUserInput {
 
   @Field(() => Date)
   updatedAt: number;
-
-  public static newFromUser(user: User): CreateUserInput {
-    const dto: CreateUserInput = plainToClass(CreateUserInput, user);
-
-    dto.createdAt = user.getCreatedAt().getTime();
-    dto.updatedAt = user.getUpdatedAt().getTime();
-
-    return dto;
-  }
 }
